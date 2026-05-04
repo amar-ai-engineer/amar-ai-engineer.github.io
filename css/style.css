@@ -344,6 +344,13 @@ img {
     margin-bottom: 32px;
 }
 
+.hero-availability {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
 .hero-social {
     display: flex;
     gap: 16px;
