@@ -41,7 +41,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Add fade-in class to animatable elements
 document.querySelectorAll(
-    '.service-card, .project-card, .skill-category, .contact-item, .about-content, .highlight-item'
+    '.process-step, .service-card, .project-card, .skill-category, .contact-item, .about-content, .highlight-item'
 ).forEach(el => {
     el.classList.add('fade-in');
     observer.observe(el);
