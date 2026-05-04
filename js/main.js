@@ -27,8 +27,8 @@ navLinks.querySelectorAll('a').forEach(link => {
 
 // Scroll-triggered fade-in animations
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -78,3 +78,43 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Mouse-tracking glow effect on project cards
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
+    });
+});
+
+// Animated counter for stats
+const statNumbers = document.querySelectorAll('.stat-number');
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const text = el.textContent;
+            const match = text.match(/^(\d+)/);
+            if (match) {
+                const target = parseInt(match[1]);
+                const suffix = text.replace(match[1], '');
+                let current = 0;
+                const step = Math.max(1, Math.floor(target / 30));
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = current + suffix;
+                }, 40);
+            }
+            statsObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+statNumbers.forEach(el => statsObserver.observe(el));
