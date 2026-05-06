@@ -384,7 +384,7 @@ img {
     transform: translateY(-3px);
 }
 
-/* ===== Hero Profile Image ===== */
+/* ===== Hero Video ===== */
 .hero-visual {
     display: flex;
     justify-content: center;
@@ -393,27 +393,26 @@ img {
     opacity: 0;
 }
 
-.hero-image-wrapper {
+.hero-video-wrapper {
     position: relative;
-    width: 340px;
-    height: 400px;
+    width: 380px;
+    max-width: 100%;
 }
 
-.profile-image {
+.hero-video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    border-radius: 24px;
-    border: 3px solid var(--border-light);
+    border-radius: 20px;
+    border: 2px solid var(--border-light);
     position: relative;
     z-index: 2;
-    transition: transform 0.5s ease, border-color 0.5s ease;
+    background: var(--bg-card);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(99, 102, 241, 0.08);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.profile-image:hover {
-    transform: scale(1.03);
+.hero-video:hover {
     border-color: var(--accent);
+    box-shadow: var(--shadow-lg), 0 0 60px rgba(99, 102, 241, 0.15);
 }
 
 .profile-glow {
@@ -424,34 +423,6 @@ img {
     z-index: 1;
     animation: glowPulse 4s ease-in-out infinite;
 }
-
-/* Orbiting skill tags */
-.profile-orbit {
-    position: absolute;
-    inset: -30px;
-    z-index: 3;
-    pointer-events: none;
-}
-
-.orbit-tag {
-    position: absolute;
-    padding: 4px 12px;
-    background: var(--bg-card);
-    border: 1px solid var(--accent);
-    border-radius: 100px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--accent-light);
-    font-family: var(--font-mono);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    animation: floatTag 6s ease-in-out infinite;
-}
-
-.tag-1 { top: 8%; right: -10%; animation-delay: 0s; }
-.tag-2 { top: 35%; right: -15%; animation-delay: 1.2s; }
-.tag-3 { bottom: 25%; right: -10%; animation-delay: 2.4s; }
-.tag-4 { bottom: 10%; left: -8%; animation-delay: 0.8s; }
-.tag-5 { top: 20%; left: -12%; animation-delay: 2s; }
 
 /* ===== Keyframe Animations ===== */
 @keyframes slideUp {
@@ -472,11 +443,6 @@ img {
 @keyframes glowPulse {
     0%, 100% { opacity: 0.5; transform: scale(1); }
     50% { opacity: 1; transform: scale(1.05); }
-}
-
-@keyframes floatTag {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
 }
 
 /* ===== About ===== */
@@ -629,56 +595,6 @@ img {
     opacity: 0.5;
 }
 
-/* Video Introduction */
-.intro-video-section {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 48px;
-    align-items: center;
-    margin-top: 16px;
-}
-
-.video-wrapper {
-    position: relative;
-}
-
-.video-play-container {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 2px solid var(--border);
-    box-shadow: var(--shadow-lg), 0 0 40px rgba(99, 102, 241, 0.08);
-    transition: all 0.4s ease;
-}
-
-.video-play-container:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow-lg), 0 0 60px rgba(99, 102, 241, 0.15);
-    transform: translateY(-4px);
-}
-
-.intro-video {
-    width: 100%;
-    display: block;
-    border-radius: var(--radius-lg);
-    background: var(--bg-card);
-}
-
-.video-text h3 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 14px;
-    background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.video-text p {
-    color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.8;
-}
 
 /* ===== Projects ===== */
 .projects-grid {
@@ -1046,13 +962,10 @@ img {
 
     .hero-visual { order: -1; }
 
-    .hero-image-wrapper {
-        width: 260px;
-        height: 310px;
+    .hero-video-wrapper {
+        width: 300px;
         margin: 0 auto;
     }
-
-    .orbit-tag { display: none; }
 
     .process-flow {
         flex-wrap: wrap;
@@ -1068,15 +981,6 @@ img {
     }
 
     .process-connector { display: none; }
-
-    .intro-video-section {
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-
-    .video-text {
-        text-align: center;
-    }
 
     .projects-grid {
         grid-template-columns: 1fr;
@@ -1174,8 +1078,7 @@ img {
         gap: 8px;
     }
 
-    .hero-image-wrapper {
-        width: 220px;
-        height: 270px;
+    .hero-video-wrapper {
+        width: 240px;
     }
 }
