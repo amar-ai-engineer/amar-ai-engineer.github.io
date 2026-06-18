@@ -66,7 +66,7 @@
                         <span class="stat-label">Years Building AI</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">6</span>
+                        <span class="stat-number">8</span>
                         <span class="stat-label">AI Projects</span>
                     </div>
                     <div class="stat">
@@ -88,9 +88,13 @@
             <div class="hero-visual">
                 <div class="hero-video-wrapper">
                     <div class="profile-glow"></div>
-                    <video class="hero-video" controls preload="metadata" poster="assets/images/profile_poster.png">
-                        <source src="assets/videos/thumbnail_video.mp4" type="video/mp4">
-                    </video>
+                    <iframe class="hero-video"
+                            src="https://www.youtube.com/embed/L3K8nAgeybQ"
+                            title="Amar Ismail — AI Engineer Portfolio"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -206,109 +210,58 @@
             <p class="section-subtitle">Real AI systems solving real business problems</p>
             <div class="projects-grid">
 
-                <!-- Project 1 -->
-                <div class="project-card">
+                <!-- Client Project: AI 2D-to-3D Video Pipeline -->
+                <div class="project-card project-card-client">
+                    <div class="project-media">
+                        <img src="assets/images/ai_2d_to_3d_video_conversion_pipeline.svg" alt="AI 2D-to-3D Video Pipeline architecture">
+                    </div>
                     <div class="project-header">
-                        <span class="project-domain">Business Automation</span>
+                        <span class="project-domain media">Media AI · Client Work</span>
                         <div class="project-links">
-                            <a href="https://github.com/amar-ai-engineer/documind-ai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                            <span class="project-private" title="Private client project"><i class="fas fa-lock"></i> Private</span>
                         </div>
                     </div>
-                    <h3 class="project-title">DocuMind</h3>
-                    <p class="project-impact">Automated invoice processing - 96% accuracy, 80% time saved</p>
+                    <h3 class="project-title">AI 2D-to-3D Video Pipeline</h3>
+                    <p class="project-impact">GPU-accelerated HDR stereoscopic conversion at production scale</p>
                     <p class="project-desc">
-                        Intelligent document processing system that extracts structured data from invoices,
-                        receipts, and contracts using OCR + classification + LLM. Tries cheap extraction first,
-                        falls back to AI only when needed.
+                        Built a production-grade GPU pipeline for automated 2D-to-3D conversion of high-resolution HDR video.
+                        Designed a distributed cloud workflow on RunPod GPUs, Cloudflare Workers, and scalable object storage
+                        with AI depth estimation, chunked processing, adaptive batching, and stereo frame generation.
                     </p>
-                    <div class="project-metrics">
-                        <div class="metric">
-                            <span class="metric-value">96%</span>
-                            <span class="metric-label">Accuracy</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">80%</span>
-                            <span class="metric-label">Time Saved</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">500+</span>
-                            <span class="metric-label">Docs/Day</span>
-                        </div>
-                    </div>
+                    <p class="project-role"><strong>Role:</strong> AI Infrastructure & Backend Engineer</p>
+                    <p class="project-note"><i class="fas fa-info-circle"></i> Private client project, presented in generalized form due to confidentiality.</p>
                     <div class="project-tags">
-                        <span>Python</span><span>OCR</span><span>PyMuPDF</span><span>Gemini</span><span>Streamlit</span>
+                        <span>Python</span><span>CUDA</span><span>Docker</span><span>Computer Vision</span><span>RunPod</span><span>Cloudflare</span>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card">
+                <!-- Client Project: AI Video Upscaling Pipeline -->
+                <div class="project-card project-card-client">
+                    <div class="project-media">
+                        <img src="assets/images/ai_upscaling_pipeline.png" alt="AI Video Upscaling Pipeline architecture">
+                    </div>
                     <div class="project-header">
-                        <span class="project-domain">Manufacturing</span>
+                        <span class="project-domain media">Media AI · Client Work</span>
                         <div class="project-links">
-                            <a href="https://github.com/amar-ai-engineer/visionqc-ai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                            <span class="project-private" title="Private client project"><i class="fas fa-lock"></i> Private</span>
                         </div>
                     </div>
-                    <h3 class="project-title">VisionQC</h3>
-                    <p class="project-impact">AI quality inspector - catches 95% defects, 70% fewer returns</p>
+                    <h3 class="project-title">AI Video Upscaling Pipeline</h3>
+                    <p class="project-impact">Automated GPU super-resolution for large-scale media enhancement</p>
                     <p class="project-desc">
-                        Deep learning visual inspection system that detects product defects using
-                        CNN and ResNet18 transfer learning, with Grad-CAM explainability showing
-                        exactly where defects are found.
+                        Developed an automated AI video upscaling pipeline using GPU-accelerated inference.
+                        Built a scalable backend with optimized FFmpeg workflows, chunked video handling, async task
+                        orchestration, and cloud deployment. Integrated AI super-resolution models with tuned GPU memory
+                        and throughput for production media workloads.
                     </p>
-                    <div class="project-metrics">
-                        <div class="metric">
-                            <span class="metric-value">95%</span>
-                            <span class="metric-label">Detection</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">70%</span>
-                            <span class="metric-label">Less Returns</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">Real-time</span>
-                            <span class="metric-label">Inference</span>
-                        </div>
-                    </div>
+                    <p class="project-role"><strong>Role:</strong> AI Backend Engineer</p>
+                    <p class="project-note"><i class="fas fa-info-circle"></i> Private client project, presented in generalized form due to confidentiality.</p>
                     <div class="project-tags">
-                        <span>PyTorch</span><span>ResNet18</span><span>Grad-CAM</span><span>OpenCV</span><span>Streamlit</span>
+                        <span>Python</span><span>FFmpeg</span><span>PyTorch</span><span>CUDA</span><span>Docker</span>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-domain healthcare">Healthcare</span>
-                        <div class="project-links">
-                            <a href="https://github.com/amar-ai-engineer/adeguard-nlp" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <h3 class="project-title">ADEGuard</h3>
-                    <p class="project-impact">Drug safety AI - detects adverse events 3x faster than manual review</p>
-                    <p class="project-desc">
-                        NLP system that detects adverse drug events from medical reports using
-                        dual NER (SciSpacy + BioBERT), clusters symptoms with HDBSCAN,
-                        and explains severity decisions with keyword highlighting.
-                    </p>
-                    <div class="project-metrics">
-                        <div class="metric">
-                            <span class="metric-value">92%</span>
-                            <span class="metric-label">NER Accuracy</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">3x</span>
-                            <span class="metric-label">Faster</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">23K+</span>
-                            <span class="metric-label">Reports</span>
-                        </div>
-                    </div>
-                    <div class="project-tags">
-                        <span>SciSpacy</span><span>BioBERT</span><span>HDBSCAN</span><span>SHAP</span><span>Streamlit</span>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
+                <!-- FinSolve -->
                 <div class="project-card">
                     <div class="project-header">
                         <span class="project-domain fintech">FinTech</span>
@@ -342,7 +295,75 @@
                     </div>
                 </div>
 
-                <!-- Project 5 -->
+                <!-- DocuMind -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-domain">Business Automation</span>
+                        <div class="project-links">
+                            <a href="https://github.com/amar-ai-engineer/documind-ai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">DocuMind</h3>
+                    <p class="project-impact">Automated invoice processing - 96% accuracy, 80% time saved</p>
+                    <p class="project-desc">
+                        Intelligent document processing system that extracts structured data from invoices,
+                        receipts, and contracts using OCR + classification + LLM. Tries cheap extraction first,
+                        falls back to AI only when needed.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">96%</span>
+                            <span class="metric-label">Accuracy</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">80%</span>
+                            <span class="metric-label">Time Saved</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">500+</span>
+                            <span class="metric-label">Docs/Day</span>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span>Python</span><span>OCR</span><span>PyMuPDF</span><span>Gemini</span><span>Streamlit</span>
+                    </div>
+                </div>
+
+                <!-- VisionQC -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-domain">Manufacturing</span>
+                        <div class="project-links">
+                            <a href="https://github.com/amar-ai-engineer/visionqc-ai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">VisionQC</h3>
+                    <p class="project-impact">AI quality inspector - catches 95% defects, 70% fewer returns</p>
+                    <p class="project-desc">
+                        Deep learning visual inspection system that detects product defects using
+                        CNN and ResNet18 transfer learning, with Grad-CAM explainability showing
+                        exactly where defects are found.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">95%</span>
+                            <span class="metric-label">Detection</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">70%</span>
+                            <span class="metric-label">Less Returns</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Real-time</span>
+                            <span class="metric-label">Inference</span>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span>PyTorch</span><span>ResNet18</span><span>Grad-CAM</span><span>OpenCV</span><span>Streamlit</span>
+                    </div>
+                </div>
+
+                <!-- AgentForce -->
                 <div class="project-card">
                     <div class="project-header">
                         <span class="project-domain">Automation</span>
@@ -376,7 +397,41 @@
                     </div>
                 </div>
 
-                <!-- Project 6 -->
+                <!-- ADEGuard -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-domain healthcare">Healthcare</span>
+                        <div class="project-links">
+                            <a href="https://github.com/amar-ai-engineer/adeguard-nlp" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">ADEGuard</h3>
+                    <p class="project-impact">Drug safety AI - detects adverse events 3x faster than manual review</p>
+                    <p class="project-desc">
+                        NLP system that detects adverse drug events from medical reports using
+                        dual NER (SciSpacy + BioBERT), clusters symptoms with HDBSCAN,
+                        and explains severity decisions with keyword highlighting.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">92%</span>
+                            <span class="metric-label">NER Accuracy</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">3x</span>
+                            <span class="metric-label">Faster</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">23K+</span>
+                            <span class="metric-label">Reports</span>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span>SciSpacy</span><span>BioBERT</span><span>HDBSCAN</span><span>SHAP</span><span>Streamlit</span>
+                    </div>
+                </div>
+
+                <!-- SpecialistLLM -->
                 <div class="project-card">
                     <div class="project-header">
                         <span class="project-domain">Gen AI</span>
