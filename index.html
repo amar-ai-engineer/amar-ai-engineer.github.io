@@ -11,16 +11,42 @@
     <meta property="og:title" content="Amar Ismail | AI Engineer">
     <meta property="og:description" content="I build AI systems that save businesses time, money, and headaches.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amar-ai-engineer.github.io/">
+    <meta property="og:image" content="https://i.ytimg.com/vi/L3K8nAgeybQ/maxresdefault.jpg">
+    <link rel="canonical" href="https://amar-ai-engineer.github.io/">
 
     <title>Amar Ismail | AI Engineer</title>
 
-    <!-- Google Fonts -->
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%236366f1'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='19' font-weight='700' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Amar Ismail",
+      "jobTitle": "AI Engineer",
+      "email": "mailto:amarismail522@gmail.com",
+      "url": "https://amar-ai-engineer.github.io/",
+      "sameAs": [
+        "https://github.com/amar-ai-engineer",
+        "https://www.linkedin.com/in/amar-ai-engineer/"
+      ],
+      "knowsAbout": ["Machine Learning", "Computer Vision", "NLP", "RAG", "LLM Fine-Tuning", "Agentic AI"]
+    }
+    </script>
+
+    <!-- Google Fonts (async — page renders with system font, swaps when loaded) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://i.ytimg.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Font Awesome (async) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -47,6 +73,7 @@
         </div>
     </nav>
 
+    <main>
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-container">
@@ -57,9 +84,8 @@
                 </h1>
                 <h2 class="hero-subtitle">AI Engineer | Computer Vision | LLM Systems</h2>
                 <p class="hero-description">
-                    I build AI systems that <strong>save businesses time, money, and headaches</strong> —
-                    from document processing pipelines to LLM-powered applications designed to scale and deliver real impact.
-                    Trusted by clients across Healthcare, FinTech, and AI startups.
+                    I build AI systems that <strong>save businesses time and money</strong> —
+                    trusted by clients in Healthcare, FinTech, and Media.
                 </p>
                 <div class="hero-stats">
                     <div class="stat">
@@ -89,13 +115,11 @@
             <div class="hero-visual">
                 <div class="hero-video-wrapper">
                     <div class="profile-glow"></div>
-                    <iframe class="hero-video"
-                            src="https://www.youtube.com/embed/L3K8nAgeybQ"
-                            title="Amar Ismail — AI Engineer Portfolio"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen></iframe>
+                    <button class="hero-video hero-video-facade" id="video-facade" aria-label="Watch my intro video">
+                        <img src="https://i.ytimg.com/vi/L3K8nAgeybQ/sddefault.jpg" alt="" fetchpriority="high">
+                        <span class="facade-play"><i class="fas fa-play"></i></span>
+                        <span class="facade-label">Watch my intro</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -108,25 +132,27 @@
             <p class="section-subtitle">The engineer behind the AI systems</p>
             <div class="about-content">
                 <div class="about-text">
-                    <p>
-                        I'm an <strong>AI Engineer</strong> based in Pakistan with <strong>3+ years of experience</strong>
-                        building and deploying real-world AI systems that solve business problems — not just prototypes.
+                    <p class="about-intro">
+                        I'm an <strong>AI Engineer</strong> with <strong>3+ years of experience</strong> shipping
+                        real-world AI systems — not just prototypes.
                     </p>
-                    <p>
-                        I started my career at <strong>SOC Solutions LLC</strong>, where I worked on end-to-end AI systems
-                        across cloud platforms like AWS and Azure. During that time, I built production applications including
-                        an AI Speech Therapist using Wav2Vec2, GAN-based design systems, and enterprise RAG pipelines.
-                    </p>
-                    <p>
-                        Since 2025, I've been working as a <strong>freelance AI engineer</strong>, collaborating with
-                        international clients on high-impact systems — including GPU-accelerated video pipelines,
-                        domain-specific LLMs, and multi-agent automation workflows.
-                    </p>
-                    <p>
-                        My approach is simple: <em>start with the business problem, choose the right AI approach,
-                        deliver measurable results.</em> Not every problem needs deep learning.
-                        Not every chatbot needs RAG.
-                    </p>
+                    <div class="about-story">
+                        <div class="story-item">
+                            <span class="story-label">Where I started</span>
+                            <h3>SOC Solutions LLC</h3>
+                            <p>Production AI on AWS &amp; Azure — an AI speech therapist, GAN design systems, enterprise RAG pipelines.</p>
+                        </div>
+                        <div class="story-item">
+                            <span class="story-label">Since 2025</span>
+                            <h3>Freelance AI Engineer</h3>
+                            <p>GPU video pipelines, domain-specific LLMs, and multi-agent automation for international clients.</p>
+                        </div>
+                        <div class="story-item">
+                            <span class="story-label">How I work</span>
+                            <h3>Business problem first</h3>
+                            <p>Right tool, measurable results. Not every problem needs deep learning. Not every chatbot needs RAG.</p>
+                        </div>
+                    </div>
                     <div class="about-highlights">
                         <div class="highlight-item">
                             <i class="fas fa-check-circle"></i>
@@ -161,43 +187,43 @@
                 <div class="process-step">
                     <div class="process-icon"><i class="fas fa-search"></i></div>
                     <div class="process-number">01</div>
-                    <h4>Problem Discovery</h4>
-                    <p>Understand your business problem. Is AI even the right solution? What data do you have? What does success look like?</p>
+                    <h3>Problem Discovery</h3>
+                    <p>Is AI even the right fix — and what does success look like?</p>
                 </div>
                 <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
                 <div class="process-step">
                     <div class="process-icon"><i class="fas fa-drafting-compass"></i></div>
                     <div class="process-number">02</div>
-                    <h4>Solution Design</h4>
-                    <p>Pick the right approach — RAG, fine-tuning, agents, computer vision, NLP. Architecture before code.</p>
+                    <h3>Solution Design</h3>
+                    <p>RAG, fine-tuning, agents, or vision — architecture before code.</p>
                 </div>
                 <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
                 <div class="process-step">
                     <div class="process-icon"><i class="fas fa-code"></i></div>
                     <div class="process-number">03</div>
-                    <h4>AI Development</h4>
-                    <p>Build models, pipelines, and logic. Iterative development with regular demos — you see progress, not surprises.</p>
+                    <h3>AI Development</h3>
+                    <p>Short cycles, regular demos. You see progress, not surprises.</p>
                 </div>
                 <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
                 <div class="process-step">
                     <div class="process-icon"><i class="fas fa-plug"></i></div>
                     <div class="process-number">04</div>
-                    <h4>API & Integration</h4>
-                    <p>Production REST APIs with FastAPI. Connect AI to your existing tools — databases, CRMs, internal systems.</p>
+                    <h3>API & Integration</h3>
+                    <p>FastAPI endpoints that plug into your existing tools.</p>
                 </div>
                 <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
                 <div class="process-step">
                     <div class="process-icon"><i class="fas fa-cloud-upload-alt"></i></div>
                     <div class="process-number">05</div>
-                    <h4>Cloud Deployment</h4>
-                    <p>Docker containers, AWS/Azure deployment, CI/CD pipelines. Your AI runs reliably — not just on my laptop.</p>
+                    <h3>Cloud Deployment</h3>
+                    <p>Docker + AWS/Azure. Runs reliably — not just on my laptop.</p>
                 </div>
                 <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
                 <div class="process-step">
                     <div class="process-icon"><i class="fas fa-chart-bar"></i></div>
                     <div class="process-number">06</div>
-                    <h4>Monitoring & Support</h4>
-                    <p>Track model performance, catch drift, retrain when needed. I don't disappear after deployment.</p>
+                    <h3>Monitoring & Support</h3>
+                    <p>Track performance, catch drift, retrain. I don't disappear.</p>
                 </div>
             </div>
 
@@ -214,7 +240,7 @@
                 <!-- Client Project: AI 2D-to-3D Video Pipeline -->
                 <div class="project-card project-card-client">
                     <div class="project-media">
-                        <img src="assets/images/ai_2d_to_3d_video_conversion_pipeline.svg" alt="AI 2D-to-3D Video Pipeline architecture">
+                        <img src="assets/images/ai_2d_to_3d_video_conversion_pipeline.svg" alt="AI 2D-to-3D Video Pipeline architecture" loading="lazy">
                     </div>
                     <div class="project-header">
                         <span class="project-domain media">Media AI · Client Work</span>
@@ -226,12 +252,25 @@
                     <a href="#testimonial" class="project-recommend-badge"><i class="fas fa-star"></i> Recommended by this client</a>
                     <p class="project-impact">GPU-accelerated HDR stereoscopic conversion at production scale</p>
                     <p class="project-desc">
-                        Built a production-grade GPU pipeline for automated 2D-to-3D conversion of high-resolution HDR video.
-                        Designed a distributed cloud workflow on RunPod GPUs, Cloudflare Workers, and scalable object storage
-                        with AI depth estimation, chunked processing, adaptive batching, and stereo frame generation.
+                        Automated 2D-to-3D conversion for high-resolution HDR video — AI depth estimation,
+                        stereo frame generation, and chunked processing on distributed cloud GPUs.
                     </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">HDR</span>
+                            <span class="metric-label">High-Res Video</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Multi-GPU</span>
+                            <span class="metric-label">Cloud Pipeline</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">End-to-End</span>
+                            <span class="metric-label">Automated</span>
+                        </div>
+                    </div>
                     <p class="project-role"><strong>Role:</strong> AI Infrastructure & Backend Engineer</p>
-                    <p class="project-note"><i class="fas fa-info-circle"></i> Private client project, presented in generalized form due to confidentiality.</p>
+                    <p class="project-note"><i class="fas fa-lock"></i> Private client work — shown in generalized form.</p>
                     <div class="project-tags">
                         <span>Python</span><span>CUDA</span><span>Docker</span><span>Computer Vision</span><span>RunPod</span><span>Cloudflare</span>
                     </div>
@@ -240,7 +279,7 @@
                 <!-- Client Project: AI Video Upscaling Pipeline -->
                 <div class="project-card project-card-client">
                     <div class="project-media">
-                        <img src="assets/images/ai_upscaling_pipeline.png" alt="AI Video Upscaling Pipeline architecture">
+                        <img src="assets/images/ai_upscaling_pipeline.png" alt="AI Video Upscaling Pipeline architecture" loading="lazy">
                     </div>
                     <div class="project-header">
                         <span class="project-domain media">Media AI · Client Work</span>
@@ -252,13 +291,25 @@
                     <a href="#testimonial" class="project-recommend-badge"><i class="fas fa-star"></i> Recommended by this client</a>
                     <p class="project-impact">Automated GPU super-resolution for large-scale media enhancement</p>
                     <p class="project-desc">
-                        Developed an automated AI video upscaling pipeline using GPU-accelerated inference.
-                        Built a scalable backend with optimized FFmpeg workflows, chunked video handling, async task
-                        orchestration, and cloud deployment. Integrated AI super-resolution models with tuned GPU memory
-                        and throughput for production media workloads.
+                        AI super-resolution for large media libraries — GPU-tuned inference, optimized
+                        FFmpeg workflows, and async task orchestration in the cloud.
                     </p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">GPU</span>
+                            <span class="metric-label">Accelerated</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Async</span>
+                            <span class="metric-label">Task Pipeline</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Cloud</span>
+                            <span class="metric-label">Deployed</span>
+                        </div>
+                    </div>
                     <p class="project-role"><strong>Role:</strong> AI Backend Engineer</p>
-                    <p class="project-note"><i class="fas fa-info-circle"></i> Private client project, presented in generalized form due to confidentiality.</p>
+                    <p class="project-note"><i class="fas fa-lock"></i> Private client work — shown in generalized form.</p>
                     <div class="project-tags">
                         <span>Python</span><span>FFmpeg</span><span>PyTorch</span><span>CUDA</span><span>Docker</span>
                     </div>
@@ -275,9 +326,8 @@
                     <h3 class="project-title">FinSolve</h3>
                     <p class="project-impact">Secure AI assistant - query time from 4 hours to 30 seconds</p>
                     <p class="project-desc">
-                        RAG chatbot with role-based access control serving 6 departments.
-                        Finance, HR, Marketing, and C-Level each see only their authorized data.
-                        RBAC enforced at retrieval level, not just prompts.
+                        RAG chatbot with role-based access for 6 departments — each sees only
+                        its authorized data, enforced at retrieval level, not just prompts.
                     </p>
                     <div class="project-metrics">
                         <div class="metric">
@@ -309,9 +359,8 @@
                     <h3 class="project-title">DocuMind</h3>
                     <p class="project-impact">Automated invoice processing - 96% accuracy, 80% time saved</p>
                     <p class="project-desc">
-                        Intelligent document processing system that extracts structured data from invoices,
-                        receipts, and contracts using OCR + classification + LLM. Tries cheap extraction first,
-                        falls back to AI only when needed.
+                        Extracts structured data from invoices, receipts, and contracts.
+                        Tries cheap OCR extraction first, uses the LLM only when needed.
                     </p>
                     <div class="project-metrics">
                         <div class="metric">
@@ -343,9 +392,8 @@
                     <h3 class="project-title">VisionQC</h3>
                     <p class="project-impact">AI quality inspector - catches 95% defects, 70% fewer returns</p>
                     <p class="project-desc">
-                        Deep learning visual inspection system that detects product defects using
-                        CNN and ResNet18 transfer learning, with Grad-CAM explainability showing
-                        exactly where defects are found.
+                        Deep learning inspection that spots product defects, with Grad-CAM
+                        heatmaps showing exactly where each defect is.
                     </p>
                     <div class="project-metrics">
                         <div class="metric">
@@ -377,9 +425,8 @@
                     <h3 class="project-title">AgentForce</h3>
                     <p class="project-impact">Multi-agent AI - 3-day research workflow in 20 minutes</p>
                     <p class="project-desc">
-                        4 AI agents (Researcher, Analyst, Writer, Reviewer) work through a LangGraph
-                        state machine to produce competitive analysis reports. Each agent has a
-                        specialized role and passes work to the next.
+                        Four agents — Researcher, Analyst, Writer, Reviewer — hand off work through
+                        a LangGraph state machine to produce competitive analysis reports.
                     </p>
                     <div class="project-metrics">
                         <div class="metric">
@@ -411,9 +458,8 @@
                     <h3 class="project-title">ADEGuard</h3>
                     <p class="project-impact">Drug safety AI - detects adverse events 3x faster than manual review</p>
                     <p class="project-desc">
-                        NLP system that detects adverse drug events from medical reports using
-                        dual NER (SciSpacy + BioBERT), clusters symptoms with HDBSCAN,
-                        and explains severity decisions with keyword highlighting.
+                        Detects adverse drug events in medical reports with dual NER
+                        (SciSpacy + BioBERT) and explains every severity decision.
                     </p>
                     <div class="project-metrics">
                         <div class="metric">
@@ -445,9 +491,8 @@
                     <h3 class="project-title">SpecialistLLM</h3>
                     <p class="project-impact">Fine-tuned medical AI - trained only 1.2% of parameters, much better answers</p>
                     <p class="project-desc">
-                        QLoRA fine-tuning that turns TinyLlama into a medical Q&A specialist.
-                        Trained on 5,000 NIH medical Q&A pairs. The adapter is just 10MB —
-                        the base model stays frozen.
+                        QLoRA fine-tuning turns TinyLlama into a medical Q&A specialist,
+                        trained on 5,000 NIH Q&A pairs. The base model stays frozen.
                     </p>
                     <div class="project-metrics">
                         <div class="metric">
@@ -563,9 +608,9 @@
                     <strong>I can definitely recommend working with Amar.</strong>
                 </blockquote>
                 <figcaption class="testimonial-author">
-                    <img src="assets/images/pieter_avatar.jpeg" alt="Pieter van Groenewoud" class="testimonial-avatar">
+                    <img src="assets/images/pieter_avatar.jpeg" alt="Pieter van Groenewoud" class="testimonial-avatar" loading="lazy">
                     <div class="testimonial-author-info">
-                        <h4 class="testimonial-name">Pieter van Groenewoud</h4>
+                        <h3 class="testimonial-name">Pieter van Groenewoud</h3>
                         <p class="testimonial-role">Tech Entrepreneur · Owner of TransferGuard.eu, XclusiveVR.com &amp; Vakantieincuracao.nl</p>
                         <div class="testimonial-meta">
                             <span class="testimonial-project"><i class="fas fa-folder-open"></i> Project: AI 2D-to-3D Video &amp; Upscaling Pipeline</span>
@@ -587,28 +632,28 @@
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div>
-                            <h4>Email</h4>
+                            <h3>Email</h3>
                             <a href="mailto:amarismail522@gmail.com">amarismail522@gmail.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-linkedin-in"></i>
                         <div>
-                            <h4>LinkedIn</h4>
+                            <h3>LinkedIn</h3>
                             <a href="https://www.linkedin.com/in/amar-ai-engineer/" target="_blank">linkedin.com/in/amar-ai-engineer</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-github"></i>
                         <div>
-                            <h4>GitHub</h4>
+                            <h3>GitHub</h3>
                             <a href="https://github.com/amar-ai-engineer" target="_blank">github.com/amar-ai-engineer</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
-                            <h4>Location</h4>
+                            <h3>Location</h3>
                             <span>Pakistan (Remote Worldwide)</span>
                         </div>
                     </div>
@@ -623,6 +668,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

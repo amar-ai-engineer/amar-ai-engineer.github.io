@@ -51,12 +51,30 @@ document.querySelectorAll(
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const hash = this.getAttribute('href');
+        const target = document.querySelector(hash);
         if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
+            history.pushState(null, '', hash);
         }
     });
 });
+
+// Hero video facade: load YouTube iframe only on click
+const videoFacade = document.getElementById('video-facade');
+if (videoFacade) {
+    videoFacade.addEventListener('click', () => {
+        const iframe = document.createElement('iframe');
+        iframe.className = 'hero-video';
+        iframe.src = 'https://www.youtube.com/embed/L3K8nAgeybQ?autoplay=1';
+        iframe.title = 'Amar Ismail — AI Engineer Portfolio';
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        iframe.setAttribute('allowfullscreen', '');
+        videoFacade.replaceWith(iframe);
+    });
+}
 
 // Active nav link highlighting on scroll
 const sections = document.querySelectorAll('.section, .hero');
