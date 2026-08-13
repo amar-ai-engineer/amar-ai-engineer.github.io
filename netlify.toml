@@ -1,0 +1,8 @@
+# Netlify config. The Next.js runtime (@netlify/plugin-nextjs) is auto-detected,
+# so API routes like /api/ami run as serverless functions. Node pinned for a
+# reproducible build. Set GEMINI_API_KEY in Site settings → Environment variables.
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"

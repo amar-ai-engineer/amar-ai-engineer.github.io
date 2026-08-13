@@ -1,0 +1,437 @@
+@import "tailwindcss";
+
+/* ============================================================
+   new-portfolio — design system (extracted from fuch.ai)
+   ============================================================ */
+
+:root {
+  /* surfaces */
+  --bg: #e9efec;
+  --bg-deep: #dbe4df;
+  --panel: rgba(13, 20, 23, 0.045);
+
+  /* accents — three-step emerald ramp */
+  --accent-deep: #0b6e62; /* text-safe deep emerald (small accent text) */
+  --accent: #0c7e70; /* primary anchor, dots, button base */
+  --accent-bright: #12a886; /* brighter emerald for gradient tops */
+  --accent-spring: #19c795; /* luminous mint — fills/glow/large only */
+  --accent-warm: #0b8676;
+  --accent-focus: #0e7e8e;
+  --glow: #7bf0d6; /* mint-cyan bloom */
+  --glow-cyan: #8fe9ff; /* mascot visor/eye */
+  --alert: #c83f37;
+  --gold: #d8a657;
+
+  /* ink */
+  --ink: rgba(13, 20, 23, 0.96);
+  --ink-muted: rgba(13, 20, 23, 0.62);
+  --ink-dim: rgba(13, 20, 23, 0.46);
+  --line: rgba(13, 20, 23, 0.12);
+
+  /* glass surface */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-hi: rgba(255, 255, 255, 0.7); /* inner top highlight */
+  --glass-shadow: rgba(40, 60, 90, 0.12);
+  --glass-tint: rgba(19, 199, 149, 0.1); /* emerald wash for featured glass */
+  --surface-solid: #ffffff; /* skip-link / opaque chips */
+
+  /* gradients */
+  --grad-primary: linear-gradient(
+    135deg,
+    var(--accent-bright) 0%,
+    var(--accent) 60%,
+    #0a6e68 100%
+  );
+  --grad-text: linear-gradient(
+    100deg,
+    var(--accent-bright) 0%,
+    var(--accent) 55%,
+    var(--accent-focus) 100%
+  );
+  --grad-glow: radial-gradient(
+    circle at 50% 45%,
+    rgba(25, 199, 149, 0.28) 0%,
+    transparent 65%
+  );
+  --grad-highlight: linear-gradient(
+    90deg,
+    rgba(19, 199, 149, 0.16),
+    rgba(19, 199, 149, 0.06)
+  );
+  --btn-ink: #ffffff; /* text on primary buttons */
+  --btn-shadow: rgba(12, 126, 112, 0.35);
+
+  /* ambient blobs */
+  --blob-a: rgba(18, 168, 134, 0.22);
+  --blob-b: rgba(123, 240, 214, 0.24);
+  --blob-c: rgba(14, 126, 142, 0.18);
+  --blob-bloom: rgba(25, 199, 149, 0.1);
+
+  /* project-card thumbnail panel */
+  --thumb-bg: #e7eaef;
+  --thumb-dot: rgba(13, 20, 23, 0.1);
+
+  /* radii */
+  --radius-card: 14px;
+  --radius-control: 8px;
+  --radius-chip: 4px;
+  --radius-modal: 20px;
+  --radius-pill: 999px;
+
+  /* tracking */
+  --track-ui: 0.18em;
+  --track-wide: 0.42em;
+
+  color-scheme: light;
+}
+
+/* ---------- dark mode ---------- */
+:root[data-theme="dark"] {
+  --bg: #0a130f; /* green-black, never neutral */
+  --bg-deep: #060d0a;
+  --panel: rgba(255, 255, 255, 0.04);
+
+  --accent-deep: #2fc79a;
+  --accent: #22c595;
+  --accent-bright: #3de0a6;
+  --accent-spring: #4fe9b4;
+  --accent-warm: #2bcea0;
+  --accent-focus: #45e3c0;
+  --glow: #58f0cc;
+  --glow-cyan: #8fe9ff;
+
+  --ink: rgba(238, 247, 243, 0.95);
+  --ink-muted: rgba(210, 224, 218, 0.62);
+  --ink-dim: rgba(200, 216, 210, 0.42);
+  --line: rgba(255, 255, 255, 0.12);
+
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-hi: rgba(255, 255, 255, 0.1);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+  --glass-tint: rgba(79, 233, 180, 0.1);
+  --surface-solid: #12211b;
+
+  --grad-primary: linear-gradient(
+    135deg,
+    var(--accent-bright) 0%,
+    var(--accent) 60%,
+    #12a883 100%
+  );
+  --grad-text: linear-gradient(
+    100deg,
+    var(--accent-spring) 0%,
+    var(--accent-deep) 55%,
+    var(--accent-focus) 100%
+  );
+  --grad-glow: radial-gradient(
+    circle at 50% 45%,
+    rgba(79, 233, 180, 0.22) 0%,
+    transparent 65%
+  );
+  --grad-highlight: linear-gradient(
+    90deg,
+    rgba(79, 233, 180, 0.18),
+    rgba(79, 233, 180, 0.06)
+  );
+  --btn-ink: #06140d; /* dark ink on mint buttons */
+  --btn-shadow: rgba(0, 0, 0, 0.45);
+
+  --blob-a: rgba(34, 197, 149, 0.2);
+  --blob-b: rgba(88, 240, 204, 0.18);
+  --blob-c: rgba(20, 160, 150, 0.16);
+  --blob-bloom: rgba(79, 233, 180, 0.14);
+
+  --thumb-bg: rgba(255, 255, 255, 0.045);
+  --thumb-dot: rgba(255, 255, 255, 0.09);
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
+  --color-panel: var(--panel);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-bright: var(--accent-bright);
+  --color-accent-spring: var(--accent-spring);
+  --color-accent-warm: var(--accent-warm);
+  --color-accent-focus: var(--accent-focus);
+  --color-glow: var(--glow);
+  --color-glow-cyan: var(--glow-cyan);
+  --color-alert: var(--alert);
+  --color-gold: var(--gold);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-dim: var(--ink-dim);
+  --color-line: var(--line);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-card: 14px;
+  --radius-control: 8px;
+  --radius-chip: 4px;
+  --radius-modal: 20px;
+  --radius-pill: 999px;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  cursor: none;
+}
+
+/* on touch / no-hover devices restore the native cursor */
+@media (hover: none) {
+  body {
+    cursor: auto;
+  }
+}
+
+/* visible keyboard focus for everyone (mouse users see nothing via :focus-visible) */
+:focus-visible {
+  outline: 2px solid var(--accent-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* skip-to-content link: off-screen until focused, then slides in */
+.skip-link {
+  position: fixed;
+  top: -80px;
+  left: 1.5rem;
+  z-index: 9999;
+  border-radius: var(--radius-pill);
+  background: var(--surface-solid);
+  color: var(--ink);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 30px rgba(40, 60, 90, 0.18);
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1.5rem;
+  outline: 2px solid var(--accent-focus);
+  outline-offset: 2px;
+}
+/* on the dark terminal / resume surfaces a lighter ring reads better */
+[data-surface="dark"] :focus-visible {
+  outline-color: var(--glow);
+}
+
+/* mobile light mode is a lighter, mostly-white build (matches fuch.ai) */
+@media (max-width: 768px) {
+  :root:not([data-theme="dark"]) html,
+  :root:not([data-theme="dark"]) body {
+    background: #ffffff;
+  }
+}
+
+/* ---------- reusable utilities ---------- */
+
+/* the signature liquid-glass panel */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow:
+    0 8px 30px var(--glass-shadow),
+    inset 0 1px 0 var(--glass-hi);
+}
+
+/* featured / accented glass — emerald wash + tinted border */
+.glass-tinted {
+  background:
+    linear-gradient(var(--glass-tint), var(--glass-tint)), var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid color-mix(in srgb, var(--accent-spring) 32%, var(--glass-border));
+  border-radius: var(--radius-card);
+  box-shadow:
+    0 10px 34px var(--glass-shadow),
+    inset 0 1px 0 var(--glass-hi);
+}
+
+/* glossy gradient primary button */
+.btn-primary {
+  background: var(--grad-primary);
+  color: var(--btn-ink);
+  border: none;
+  box-shadow:
+    0 8px 24px var(--btn-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+.btn-primary:hover {
+  filter: brightness(1.05);
+  box-shadow:
+    0 12px 32px var(--btn-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* gradient text on a single keyword */
+.text-gradient {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* frosted "highlighter" band behind a word (near-black ink stays legible) */
+.text-band {
+  background: var(--grad-highlight);
+  border-radius: 6px;
+  padding: 0 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* radial accent bloom — sits behind a focal element */
+.glow-layer {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--grad-glow);
+  filter: blur(8px);
+}
+
+.glass-pill {
+  border-radius: var(--radius-pill);
+}
+
+/* mono micro-label — used everywhere for section numbers, tags, kickers */
+.mono-label {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: var(--track-ui);
+  font-size: 11px;
+  color: var(--ink-dim);
+}
+
+.mono-label-wide {
+  letter-spacing: var(--track-wide);
+}
+
+/* fluid display heading */
+.display {
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.02;
+}
+
+/* scroll without a visible scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes blob-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(6vw, 4vh) scale(1.12);
+  }
+}
+@keyframes blob-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate(-5vw, 6vh) scale(0.95);
+  }
+}
+@keyframes blob-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4vw, -5vh) scale(1.1);
+  }
+}
+@keyframes grain-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-6%, 4%);
+  }
+}
+@keyframes vignette-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes float-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.55ch;
+  background: var(--accent);
+  animation: caret-blink 1s step-end infinite;
+}
+
+/* respect reduced motion everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
