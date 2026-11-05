@@ -1,0 +1,127 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Author from '../../components/Author.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({ params: { slug: entry.id }, props: { entry, next: all[(i + 1) % all.length] } }));
+}
+interface Props { entry: CollectionEntry<'projects'>; next: CollectionEntry<'projects'> }
+const { entry, next } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const services = await getCollection('services');
+const service = services.find((s) => s.id === d.service);
+const url = `${site.url}/work/${entry.id}/`;
+const ramp = ['var(--r1)', 'var(--r2)', 'var(--r3)', 'var(--r4)', 'var(--r5)'];
+const col = (i: number) => ramp[Math.min(4, Math.round((i * 4) / Math.max(1, d.nodes.length - 1)))];
+const graph = [
+  {
+    '@type': 'Article',
+    headline: d.h1,
+    description: d.description,
+    author: { '@id': `${site.url}/#amar` },
+    publisher: { '@id': `${site.url}/#business` },
+    datePublished: d.published,
+    dateModified: d.updated,
+    image: `${site.url}/og/${entry.id}.png`,
+    about: d.about,
+    mainEntityOfPage: url,
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Work', item: `${site.url}/work/` },
+      { '@type': 'ListItem', position: 3, name: d.h1 },
+    ],
+  },
+];
+---
+<Base title={d.title} description={d.description} type="article" ogImage={`/og/${entry.id}.png`} published={d.published} modified={d.updated} graph={graph}>
+  <Crumbs items={[{ name: 'Home', href: '/' }, { name: 'Work', href: '/work/' }, { name: d.h1 }]} />
+
+  <section style="padding:56px 0 72px">
+    <div class="wrap grid12" style="row-gap:40px;align-items:end">
+      <div style="grid-column:span 8;display:flex;flex-direction:column;gap:24px">
+        <div class="rise" style="display:flex;flex-wrap:wrap;gap:10px"><span class="tag">{d.tag}</span><span class="tag ok">{d.status}</span></div>
+        <h1 class="display d1 rise" style="animation-delay:.1s;font-size:clamp(40px,5.2vw,68px)">{d.h1}</h1>
+        <p class="lede rise" style="animation-delay:.25s">{d.lede}</p>
+      </div>
+      <dl class="facts" style="grid-column:10 / span 3">
+        <div><dt>Client</dt><dd>{d.client}</dd></div>
+        <div><dt>Role</dt><dd>{d.role}</dd></div>
+        <div><dt>Period</dt><dd>{d.period}</dd></div>
+        <div><dt>Status</dt><dd>{d.state}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="band pad-s" aria-labelledby="path">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:32px">
+      <h2 id="path" class="display d3">How the system works</h2>
+      <ol class="flow" style={`grid-template-columns:repeat(${Math.min(d.nodes.length, 6)},minmax(0,1fr))`}>
+        {d.nodes.map((n, i) => (
+          <li style={`--c:${col(i)}`}>
+            <span class="pulse" aria-hidden="true" style={`animation-delay:${(i * 0.37).toFixed(2)}s`}></span>
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
+            <b>{n.label}</b>
+            <small>{n.tech}</small>
+          </li>
+        ))}
+      </ol>
+      <div class="prose"><Content /></div>
+    </div>
+  </section>
+
+  <section class="pad-s" aria-labelledby="file">
+    <div class="wrap grid12" style="row-gap:40px">
+      <h2 id="file" class="display d3" style="grid-column:span 4">Problem, role, <span class="hl">result.</span></h2>
+      <dl class="kv" style="grid-column:6 / span 7">
+        {d.rows.map((r) => <div class="rv"><dt>{r.k}</dt><dd style="font-size:18px">{r.v}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  {d.notes.length > 0 && (
+    <section class="band pad-s" aria-labelledby="notes">
+      <div class="wrap" style="display:flex;flex-direction:column;gap:40px">
+        <h2 id="notes" class="display d3">Engineering notes</h2>
+        <div class="grid3">
+          {d.notes.map((n) => (
+            <div class="card lift get rv">
+              <span class="n">{n.k}</span>
+              <h3>{n.t}</h3>
+              <p>{n.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {d.quote && (
+    <section class="pad" style="overflow:hidden">
+      <div class="wrap"><Testimonial kicker="What the client says" /></div>
+    </section>
+  )}
+
+  <Author published={d.published} updated={d.updated} />
+
+  <section class="band" style="padding:56px 0">
+    <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px">
+      <a href={`/work/${next.id}/`} style="display:flex;flex-direction:column;gap:4px;color:var(--ink)">
+        <span class="small-label">Next case →</span>
+        <span class="display" style="font-size:24px">{next.data.homeTitle}</span>
+      </a>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center">
+        {service && <a class="link-u" href={`/services/${service.id}/`}>{service.data.h1.charAt(0).toUpperCase() + service.data.h1.slice(1)} <span class="arr" aria-hidden="true">→</span></a>}
+        <a class="btn" href="/contact/">Discuss a similar project <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</Base>

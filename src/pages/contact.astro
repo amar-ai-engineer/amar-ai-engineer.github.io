@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import BriefBuilder from '../components/BriefBuilder.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+import { homeFaqs } from '../data/home';
+const faqs = homeFaqs.slice(3);
+const graph = [
+  { '@type': 'ContactPage', url: `${site.url}/contact/`, about: { '@id': `${site.url}/#business` } },
+  { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<Base title="Hire an AI Engineer — Start a Project | Amar Ismail" description="Tell me what you want to build. I'll reply with an honest take on whether AI fits, and a scoped first milestone." ogImage="/og/contact.png" graph={graph}>
+  <Crumbs items={[{ name: 'Home', href: '/' }, { name: 'Contact' }]} />
+  <section class="pad" style="padding-top:56px">
+    <div class="wrap"><BriefBuilder headingLevel="h1" kicker="Hire an AI engineer" /></div>
+  </section>
+  <section class="band pad-s" aria-labelledby="next">
+    <div class="wrap grid12" style="row-gap:32px;align-items:start">
+      <h2 id="next" class="display d3" style="grid-column:span 4">What happens next</h2>
+      <div style="grid-column:6 / span 7"><Faq items={faqs} group="contact-faq" /></div>
+    </div>
+  </section>
+</Base>

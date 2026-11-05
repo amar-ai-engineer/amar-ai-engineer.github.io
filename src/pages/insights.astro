@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import { site } from '../data/site';
+import editions from '../data/insights.json';
+
+// Add one object per published LinkedIn newsletter edition to src/data/insights.json:
+// { "n": "01", "title": "...", "date": "2026-11-20", "url": "https://www.linkedin.com/pulse/...", "excerpt": "..." }
+const list = [...editions].sort((a, b) => b.date.localeCompare(a.date));
+const planned = [
+  'Your GPU isn’t the bottleneck: when 66% of video-AI time is CPU I/O',
+  'PyTorch on Blackwell GPUs: the sm_120 trap',
+  'RAG permissions belong in retrieval, not the prompt',
+];
+const graph = [{ '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+  { '@type': 'ListItem', position: 2, name: 'Insights' },
+] }];
+---
+<Base title="AI Insights on LLMs, RAG & Production ML | Amar Ismail" description={`Practical notes on building and shipping AI, from the ${site.newsletter.name} newsletter on LinkedIn.`} ogImage="/og/insights.png" graph={graph}>
+  <Crumbs items={[{ name: 'Home', href: '/' }, { name: 'Insights' }]} />
+  <section style="padding:56px 0 72px">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px">
+      <p class="kicker rise">LinkedIn newsletter</p>
+      <h1 class="display d1 rise" style="animation-delay:.1s">Insights: <span class="hl">{site.newsletter.name}</span></h1>
+      <p class="lede rise" style="animation-delay:.25s">Practical notes on building and shipping AI — LLMs, RAG, agents and GPU pipelines — from real production work.</p>
+      <a class="btn rise" href={site.newsletter.url} style="align-self:flex-start;animation-delay:.35s">Subscribe on LinkedIn <span class="arr arr-ne" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+  <section class="band pad-s">
+    <div class="wrap">
+      {list.length > 0 ? (
+        <div class="grid3">
+          {list.map((e) => (
+            <a class="card lift out rv" href={e.url} data-cursor="Read" style="--c:var(--r3);min-height:280px">
+              <span class="small-label">Edition {e.n} · <time datetime={e.date}>{new Date(e.date + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time></span>
+              <h2 class="display" style="font-size:22px;line-height:1.2">{e.title}</h2>
+              <p class="muted" style="font-size:15px;flex:1">{e.excerpt}</p>
+              <span class="small-label" style="color:var(--link)">Read on LinkedIn <span class="arr arr-ne" aria-hidden="true">↗</span></span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <h2 class="display d3">Coming up first</h2>
+          <ol class="faq" style="list-style:none;margin:0;padding:0">
+            {planned.map((p, i) => (
+              <li class="rv" style="display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)">
+                <span class="small-label" style="padding-top:4px">0{i + 1}</span>
+                <span class="display" style="font-size:20px">{p}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>

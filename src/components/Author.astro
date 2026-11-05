@@ -1,0 +1,19 @@
+---
+import { site } from '../data/site';
+interface Props { published?: string; updated: string }
+const { published, updated } = Astro.props;
+const fmt = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+---
+<div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding-top:40px;padding-bottom:40px;border-top:1px solid var(--line)">
+  <div class="author">
+    <img src={site.portrait} alt="Amar Ismail" width="72" height="72" loading="lazy" />
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <span class="small-label">Written &amp; built by</span>
+      <a href="/about/" style="color:var(--ink);font-size:19px;font-weight:500">Amar Ismail — AI engineer &amp; consultant</a>
+      <a href={site.linkedin} style="font-size:14px">LinkedIn ↗</a>
+    </div>
+  </div>
+  <span class="small-label" style="text-transform:none;letter-spacing:.02em">
+    {published && <>Published <time datetime={published}>{fmt(published)}</time> · </>}Last updated <time datetime={updated}>{fmt(updated)}</time>
+  </span>
+</div>
