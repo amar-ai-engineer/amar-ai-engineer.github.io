@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Testimonial from '../components/Testimonial.astro';
+import { site } from '../data/site';
+const graph = [
+  { '@type': 'AboutPage', url: `${site.url}/about/`, mainEntity: { '@id': `${site.url}/#amar` } },
+  { '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'About' },
+  ] },
+];
+const timeline = [
+  { when: '2025 – present', what: 'Freelance AI engineer', where: 'Remote · clients in the US and Europe', d: 'GPU video pipelines (2D-to-3D HDR conversion, upscaling) and generative AI systems.' },
+  { when: '2023 – 2025', what: 'AI engineer', where: 'SOC Solutions LLC · remote', d: 'Core developer on Izzy.AI; VictorAI diffusion fine-tuning; Botmer Assistant RAG backend and Telegram integration.' },
+  { when: '2023', what: 'BS Computer Science', where: 'GCU Faisalabad', d: 'Final-year project: diabetic retinopathy detection with CNNs on retinal images.' },
+  { when: 'Earlier', what: 'PIAIC AI Developer programme', where: 'One-year programme · grade A+', d: 'Plus the Deep Learning Specialization on Coursera (2024).' },
+];
+---
+<Base title="About Amar Ismail — AI Engineer & Consultant" description="AI engineer in Pakistan working with clients in the US and Europe. Background, experience, education and how I work." ogImage="/og/about.png" graph={graph}>
+  <Crumbs items={[{ name: 'Home', href: '/' }, { name: 'About' }]} />
+  <section style="padding:56px 0 96px">
+    <div class="wrap grid12" style="row-gap:40px;align-items:center">
+      <div style="grid-column:span 7;display:flex;flex-direction:column;gap:24px">
+        <p class="kicker rise">About</p>
+        <h1 class="display d1 rise" style="animation-delay:.1s">About Amar Ismail</h1>
+        <p class="rise" style="font-size:20px;line-height:1.55;animation-delay:.25s">{site.entity}</p>
+        <p class="muted rise" style="animation-delay:.35s">I decide whether AI is the right fix before I write the code. Then I build the unglamorous parts — the queue, the API, the container, the deploy — with the same care as the model, because that is usually where AI projects fail.</p>
+        <div class="rise" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;animation-delay:.45s">
+          <a class="btn" href="/contact/">Discuss a project <span class="arr" aria-hidden="true">→</span></a>
+          <a class="link-u" href={site.introVideo}>Watch the intro video <span class="arr" aria-hidden="true">▷</span></a>
+        </div>
+      </div>
+      <figure class="portrait rise" data-cursor="Hello" style="grid-column:9 / span 4;animation-delay:.2s">
+        <img src={site.portrait} alt="Portrait of Amar Ismail" width="960" height="960" />
+        <figcaption>Faisalabad, PK</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="band pad-s" aria-labelledby="exp">
+    <div class="wrap grid12" style="row-gap:32px">
+      <h2 id="exp" class="display d3" style="grid-column:span 4">Experience &amp; education</h2>
+      <ol style="grid-column:6 / span 7;list-style:none;margin:0;padding:0;border-top:1px solid var(--line)">
+        {timeline.map((t) => (
+          <li class="rv" style="display:grid;grid-template-columns:140px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)">
+            <span class="small-label" style="padding-top:4px">{t.when}</span>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <h3 class="display" style="font-size:20px">{t.what}</h3>
+              <span class="muted" style="font-size:14px">{t.where}</span>
+              <p class="muted" style="font-size:15px">{t.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  <section class="pad"><div class="wrap"><Testimonial /></div></section>
+</Base>

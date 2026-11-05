@@ -1,0 +1,56 @@
+---
+// Contact "brief builder": picks + one line → opens the visitor's email app with a structured, pre-filled brief.
+import { site } from '../data/site';
+interface Props { headingLevel?: 'h1' | 'h2'; kicker?: string }
+const { headingLevel = 'h2', kicker = 'Hire an AI engineer' } = Astro.props;
+const groups = [
+  { name: 'Project type', opts: ['GenAI / LLM', 'AI chatbot', 'AI agents', 'Vision / video', 'GPU infrastructure', 'Something else'], def: 0 },
+  { name: 'Stage', opts: ['Idea', 'Prototype', 'In production'], def: 0 },
+  { name: 'Timeline', opts: ['ASAP', '1–3 months', 'Exploring'], def: 1 },
+];
+const H = headingLevel;
+---
+<div class="grid12" style="row-gap:48px">
+  <div style="grid-column:span 7;display:flex;flex-direction:column;gap:30px">
+    {H === 'h1'
+      ? <h1 class="kicker">{kicker}</h1>
+      : <h2 class="kicker">{kicker}</h2>}
+    <p class="display d1 rv-clip" style="font-size:clamp(40px,5vw,64px)">Have a model that <span class="hl">needs to ship?</span></p>
+    <form class="brief" data-brief data-email={site.email} style="display:flex;flex-direction:column;gap:26px">
+      {groups.map((g) => (
+        <fieldset>
+          <legend class="small-label">{g.name}</legend>
+          <div class="chips" data-group-name={g.name}>
+            {g.opts.map((o, i) => <button type="button" class="chip-btn" aria-pressed={i === g.def ? 'true' : 'false'}>{o}</button>)}
+          </div>
+        </fieldset>
+      ))}
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <label for="brief-msg" class="small-label">In one line, what are you building?</label>
+        <input id="brief-msg" name="msg" class="field" type="text" placeholder="e.g. A chatbot that answers from our product manuals" autocomplete="off" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <label for="brief-src" class="small-label">How did you find me?</label>
+        <select id="brief-src" name="source" class="field">
+          <option value="">Choose one (optional)</option>
+          <option>Google search</option>
+          <option>ChatGPT / Perplexity / AI search</option>
+          <option>LinkedIn</option>
+          <option>GitHub</option>
+          <option>Referral</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px">
+        <button class="btn" type="submit">Send brief <span class="arr" aria-hidden="true">→</span></button>
+        <span class="small-label" style="text-transform:none;letter-spacing:.02em">Opens your email app, pre-filled. {site.availability}.</span>
+      </div>
+    </form>
+  </div>
+  <div class="c-links" style="grid-column:9 / span 4;border-top:1px solid var(--line);align-self:start">
+    <a href={`mailto:${site.email}`}><span><span class="small-label" style="display:block">Email</span>{site.email}</span><span class="arr arr-ne" aria-hidden="true">↗</span></a>
+    <a href={site.linkedin}><span><span class="small-label" style="display:block">LinkedIn</span>in/amar-ai-engineer</span><span class="arr arr-ne" aria-hidden="true">↗</span></a>
+    <a href={site.github}><span><span class="small-label" style="display:block">GitHub</span>amar-ai-engineer</span><span class="arr arr-ne" aria-hidden="true">↗</span></a>
+    <a href="/about/"><span><span class="small-label" style="display:block">Based in</span>Pakistan · remote worldwide</span><span class="arr" aria-hidden="true">→</span></a>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+---
+import { site } from '../data/site';
+interface Props { kicker?: string; headingLevel?: 'h2' | 'h3' }
+const { kicker = 'Client testimonial', headingLevel = 'h2' } = Astro.props;
+const H = headingLevel;
+---
+<div class="grid12" style="row-gap:48px;align-items:start">
+  <div class="rv" style="grid-column:span 4;display:flex;flex-direction:column;gap:28px">
+    <H class="kicker">{kicker}</H>
+    <div style="display:flex;align-items:center;gap:18px">
+      <img src="/img/pieter.jpg" alt="Pieter van Groenewoud" width="72" height="72" loading="lazy" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:1px solid var(--line)" />
+      <div>
+        <p style="font-size:20px;font-weight:500">Pieter van Groenewoud</p>
+        <p class="muted" style="font-size:14px">Tech entrepreneur · Netherlands</p>
+      </div>
+    </div>
+    <dl class="meta-list">
+      <div><dt>Owner of</dt><dd>TransferGuard.eu · XclusiveVR.com · Vakantieincuracao.nl</dd></div>
+      <div><dt>Project</dt><dd>2D-to-3D video &amp; upscaling pipelines</dd></div>
+      <div><dt>Source</dt><dd style="color:var(--ok)">LinkedIn recommendation</dd></div>
+    </dl>
+    <a class="btn btn-ghost btn-sm" href={site.recommendations} style="align-self:flex-start">Verify on LinkedIn <span class="arr arr-ne" aria-hidden="true">↗</span></a>
+  </div>
+  <figure class="rv" style="grid-column:6 / span 7;margin:0;position:relative">
+    <span class="quote-mark" aria-hidden="true">“</span>
+    <blockquote style="margin:0;position:relative" cite={site.recommendations}>
+      <p class="quote">Amar has strong analytical skills and works in a very focused and goal-oriented way. <em>He doesn’t give up until something is truly right</em> and shows a lot of perseverance in doing so. During my project, he fully committed himself and quickly made the work his own. His dedication and focus make him a valuable collaboration partner. I can definitely recommend working with Amar.</p>
+    </blockquote>
+    <figcaption class="small-label" style="margin-top:28px;display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="display:block;width:40px;height:2px;background:var(--mint)"></span>Quoted in full from LinkedIn</figcaption>
+  </figure>
+</div>

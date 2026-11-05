@@ -1,0 +1,105 @@
+---
+import '@fontsource-variable/sora';
+import '@fontsource-variable/geist';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  type?: 'website' | 'article';
+  ogImage?: string;
+  ogAlt?: string;
+  published?: string;
+  modified?: string;
+  graph?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+const props = Astro.props;
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/services/', label: 'Services' },
+  { href: '/work/', label: 'Work' },
+  { href: '/#process', label: 'Process' },
+  { href: '/insights/', label: 'Insights' },
+  { href: '/about/', label: 'About' },
+];
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F0F0F0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#060B0A" media="(prefers-color-scheme: dark)" />
+    <script is:inline>
+      // Light (Mint Aurora) is the default; dark (Midnight Mint) only when the visitor chooses it.
+      try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
+      document.documentElement.classList.add('js');
+    </script>
+    <SEO path={path} {...props} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <!-- Add after verifying the site:
+    <meta name="google-site-verification" content="" />
+    <meta name="msvalidate.01" content="" /> -->
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label={`${site.name} — home`}>
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
+          {site.name}
+        </a>
+        <nav class="nav" aria-label="Primary">
+          {nav.map((n) => (
+            <a class="navlink" href={n.href} aria-current={path.startsWith(n.href) && n.href !== '/#process' ? 'page' : undefined}>
+              <span data-t={n.label}>{n.label}</span>
+            </a>
+          ))}
+        </nav>
+        <div class="head-actions">
+          <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch colour theme">
+            <svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"></path></svg>
+            <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path></svg>
+          </button>
+          <a class="btn btn-sm mag" href="/contact/">Discuss a project <span class="arr" aria-hidden="true">→</span></a>
+          <button class="icon-btn menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-menu>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"></path></svg>
+          </button>
+        </div>
+      </div>
+      <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile" data-open="false">
+        {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+        <a class="btn" href="/contact/">Discuss a project →</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© {year} {site.name} · AI consulting &amp; development · {site.city}, Pakistan — working with clients in the US and Europe</span>
+        <nav aria-label="Footer">
+          <a href="/services/">Services</a>
+          <a href="/work/">Work</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+          <a href={site.linkedin}>LinkedIn</a>
+          <a href={site.github}>GitHub</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

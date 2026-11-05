@@ -1,0 +1,139 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Faq from '../../components/Faq.astro';
+import Author from '../../components/Author.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const all = await getCollection('services');
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry, all } }));
+}
+interface Props { entry: CollectionEntry<'services'>; all: CollectionEntry<'services'>[] }
+const { entry, all } = Astro.props;
+const d = entry.data;
+const url = `${site.url}/services/${entry.id}/`;
+const related = d.related.map((slug) => all.find((s) => s.id === slug)).filter(Boolean) as CollectionEntry<'services'>[];
+const ramp = ['var(--r1)', 'var(--r2)', 'var(--r3)', 'var(--r4)', 'var(--r5)'];
+
+const graph = [
+  {
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name: d.h1.charAt(0).toUpperCase() + d.h1.slice(1),
+    serviceType: d.kicker,
+    description: d.description,
+    provider: { '@id': `${site.url}/#business` },
+    areaServed: [{ '@type': 'Country', name: 'United States' }, { '@type': 'Place', name: 'Europe' }],
+    url,
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${site.url}/services/` },
+      { '@type': 'ListItem', position: 3, name: d.h1 },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: d.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+<Base title={d.title} description={d.description} ogImage={`/og/${entry.id}.png`} modified={d.updated} graph={graph}>
+  <Crumbs items={[{ name: 'Home', href: '/' }, { name: 'Services', href: '/services/' }, { name: d.h1 }]} />
+
+  <section style="padding:56px 0 96px;border-bottom:1px solid var(--line);overflow:hidden">
+    <div class="aurora" aria-hidden="true" style="right:-120px;top:-60px;width:520px;height:560px;opacity:.35"></div>
+    <div class="wrap grid12" style="position:relative;row-gap:40px;align-items:end">
+      <div style="grid-column:span 8;display:flex;flex-direction:column;gap:26px">
+        <p class="kicker rise">{d.kicker}</p>
+        <h1 class="display d1 rise" style="animation-delay:.1s">{d.h1}</h1>
+        <p class="rise" style="font-size:20px;line-height:1.55;max-width:40em;animation-delay:.25s">{d.summary}</p>
+        <div class="rise" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;animation-delay:.4s">
+          <a class="btn" href="/contact/">{d.cta} <span class="arr" aria-hidden="true">→</span></a>
+          <a class="link-u" href="#faq">Read the FAQ <span class="arr arr-d" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <dl class="facts" style="grid-column:10 / span 3">
+        {d.facts.map((f) => <div><dt>{f.k}</dt><dd>{f.v}</dd></div>)}
+        <div><dt>Last updated</dt><dd><time datetime={d.updated}>{new Date(d.updated + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })}</time></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="pad-s" aria-labelledby="get">
+    <div class="wrap">
+      <h2 id="get" class="display d3" style="margin-bottom:40px">What you get</h2>
+      <div class="grid3">
+        {d.gets.map((g, i) => (
+          <div class="card lift get rv" style={`transition-delay:${i * 50}ms`}>
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{g.t}</h3>
+            <p>{g.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band pad-s" aria-labelledby="how">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:32px">
+      <h2 id="how" class="display d3">{d.flowTitle}</h2>
+      <p class="muted" style="max-width:46em">{d.flowIntro}</p>
+      <ol class="flow">
+        {d.flow.map((f, i) => (
+          <li style={`--c:${ramp[i]}`}>
+            <span class="pulse" aria-hidden="true" style={`animation-delay:${(i * 0.44).toFixed(2)}s`}></span>
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
+            <b>{f.t}</b>
+            <small>{f.tech}</small>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="pad-s" aria-labelledby="proof">
+    <div class="wrap grid12" style="row-gap:32px">
+      <h2 id="proof" class="display d3" style="grid-column:span 4">{d.proofTitle}</h2>
+      <div class="proof-list" style="grid-column:6 / span 7;border-top:1px solid var(--line)">
+        {d.proof.map((p) => (
+          <div class="rv">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:baseline">
+              <h3>{p.name}</h3>
+              {p.badge && <span class="tag ok">{p.badge}</span>}
+            </div>
+            <p class="muted">{p.text}</p>
+            {p.href && <a class="link-u" href={p.href} style="align-self:flex-start;min-height:36px">{p.linkLabel ?? 'Learn more'} <span class="arr" aria-hidden="true">→</span></a>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="band pad-s" aria-labelledby="faq-h">
+    <div class="wrap grid12" style="row-gap:32px;align-items:start">
+      <h2 id="faq-h" class="display d3" style="grid-column:span 4">{d.h1.charAt(0).toUpperCase() + d.h1.slice(1).replace(' services', '')} FAQ</h2>
+      <div style="grid-column:6 / span 7"><Faq items={d.faqs} group={`faq-${entry.id}`} /></div>
+    </div>
+  </section>
+
+  <Author updated={d.updated} />
+
+  <section class="pad-s" style="padding-top:0">
+    <div class="wrap" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <span class="small-label" style="margin-right:8px">Related services</span>
+      {related.map((r) => <a class="chip lift" href={`/services/${r.id}/`} style="color:var(--ink)">{r.data.h1} →</a>)}
+    </div>
+  </section>
+
+  <section class="band pad">
+    <div class="wrap" style="display:flex;flex-direction:column;align-items:flex-start;gap:28px">
+      <p class="display d2">{d.closing}</p>
+      <a class="btn" href="/contact/">{d.cta} <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import CaseFile from '../../components/CaseFile.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../data/site';
+import { moreWork, lab } from '../../data/home';
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const graph = [{
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Work' },
+  ],
+}];
+---
+<Base title="AI Engineering Case Studies | Amar Ismail" description="Production AI systems I've built: a 2D-to-3D HDR video pipeline, GPU video upscaling, an AI speech-therapy platform and RAG assistants." ogImage="/og/work.png" graph={graph}>
+  <Crumbs items={[{ name: 'Home', href: '/' }, { name: 'Work' }]} />
+  <section style="padding:56px 0 96px">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px">
+      <p class="kicker rise">Work</p>
+      <h1 class="display d1 rise" style="animation-delay:.1s">AI engineering <span class="hl">case studies</span></h1>
+      <p class="lede rise" style="animation-delay:.25s">Production systems for real clients and products — what the problem was, what I built, and what happened.</p>
+    </div>
+  </section>
+  <section class="band pad">
+    <div class="wrap">
+      {projects.map((p, i) => (
+        <CaseFile slug={p.id} fig={String(i + 1).padStart(2, '0')} title={p.data.h1} tag={p.data.tag} status={p.data.status} nodes={p.data.nodes} rows={p.data.rows} flip={i % 2 === 1} headingLevel="h2" />
+      ))}
+    </div>
+  </section>
+  <section class="pad">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:56px">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <h2 class="display d3">More shipped work <span class="muted" style="font-weight:400">— built at SOC Solutions</span></h2>
+        <div class="table-wrap"><table class="table"><tbody>
+          {moreWork.map((m) => <tr><td>{m.name}</td><td class="muted">{m.desc}</td><td class="mono">{m.stack}</td></tr>)}
+        </tbody></table></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <h2 class="display d3">Lab <span class="muted" style="font-weight:400">— self-initiated builds</span></h2>
+        <div class="table-wrap"><table class="table"><tbody>
+          {lab.map((l) => <tr><td>{l.name}</td><td class="muted">{l.desc}</td><td class="mono">{l.stack}</td><td style="text-align:right"><a class="mono" href={l.url} style="font-size:12px" aria-label={`${l.name} code on GitHub`}>Repo ↗</a></td></tr>)}
+        </tbody></table></div>
+      </div>
+    </div>
+  </section>
+</Base>

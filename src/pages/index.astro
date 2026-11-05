@@ -1,0 +1,280 @@
+---
+import Base from '../layouts/Base.astro';
+import SystemStack from '../components/SystemStack.astro';
+import CaseFile from '../components/CaseFile.astro';
+import Faq from '../components/Faq.astro';
+import BriefBuilder from '../components/BriefBuilder.astro';
+import Testimonial from '../components/Testimonial.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+import { outcomes, capabilities, moreWork, lab, process, homeFaqs, marquee } from '../data/home';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const ramp = ['var(--r1)', 'var(--r2)', 'var(--r3)', 'var(--r4)', 'var(--r5)'];
+const outColors = ['var(--r2)', 'var(--r3)', 'var(--r4)', 'var(--r5)'];
+const words = ['Models', 'are', 'the', 'easy', 'part.', 'I', 'build', 'what'];
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<Base
+  title="AI Consulting & Development Services | Amar Ismail"
+  description="AI engineer and consultant for businesses. I build and deploy LLM/RAG apps, AI agents, computer vision and GPU pipelines, from prototype to production."
+  ogImage="/og/home.png"
+  graph={[faqSchema]}
+>
+  <!-- 00 HERO -->
+  <section class="hero" aria-labelledby="h1">
+    <div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden">
+      <div class="aurora" style="right:1%;top:7%;width:640px;height:680px"></div>
+      <div class="glow" style="right:8%;top:18%;width:420px;height:420px;background:radial-gradient(circle,rgba(47,212,154,.22),transparent 65%)"></div>
+      <span class="sig sig-x" style="top:128px;left:0;animation-duration:7s;animation-delay:.5s"></span>
+      <span class="sig sig-x" style="top:384px;left:0;animation-duration:9s;animation-delay:3s"></span>
+      <span class="sig sig-x" style="top:640px;left:0;animation-duration:6s;animation-delay:5s"></span>
+      <span class="sig sig-y" style="left:192px;top:0;animation-duration:8s;animation-delay:1.5s"></span>
+      <span class="sig sig-y" style="left:576px;top:0;animation-duration:10s;animation-delay:4s"></span>
+    </div>
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <h1 id="h1" class="kicker rise" style="animation-delay:.05s">AI consulting &amp; development services for businesses — LLMs, AI agents, computer vision</h1>
+        <p class="display d1">
+          <span class="sr-only">Models are the easy part. I build what ships them.</span>
+          {words.map((w, i) => <><span class="w" aria-hidden="true"><span style={`animation-delay:${(0.15 + i * 0.07).toFixed(2)}s`}>{w}</span></span>{' '}</>)}
+          <span class="w" aria-hidden="true"><span style="animation-delay:.71s"><span class="ships">ships</span></span></span>{' '}
+          <span class="w" aria-hidden="true"><span style="animation-delay:.78s">them.</span></span>
+        </p>
+        <p class="lede rise" style="animation-delay:.95s">I help businesses plan, build and deploy AI — LLM and RAG applications, AI agents, computer vision and GPU pipelines — from the first experiment to a production API your product can call.</p>
+        <div class="rise" style="display:flex;flex-wrap:wrap;align-items:center;gap:20px;animation-delay:1.1s">
+          <a class="btn" href="/contact/">Discuss a project <span class="arr" aria-hidden="true">→</span></a>
+          <a class="link-u" href="#work">Explore the work <span class="arr arr-d" aria-hidden="true">↓</span></a>
+        </div>
+        <p class="avail rise" style="animation-delay:1.25s"><span class="live" aria-hidden="true"></span>{site.availability} · Pakistan, working remotely with US &amp; European clients</p>
+      </div>
+      <div class="hero-vis rise" style="animation-delay:.3s">
+        <SystemStack />
+      </div>
+    </div>
+  </section>
+
+  <div class="marq-wrap" aria-hidden="true">
+    <div class="marq">
+      {[...marquee, ...marquee].map((t) => <><span>{t}</span><b>✦</b></>)}
+    </div>
+  </div>
+
+  <!-- PROOF -->
+  <section class="band" aria-label="Proof" style="border-top:0">
+    <div class="wrap proof">
+      <div>
+        <p style="font-size:17px;line-height:1.5">“He doesn’t give up until something is truly right.”</p>
+        <p class="small-label">Pieter van Groenewoud · owner, XclusiveVR.com · <a href="#testimonial">read the full recommendation ↓</a></p>
+      </div>
+      <div>
+        <p style="font-size:17px;line-height:1.5">Core developer on Izzy.AI — a launched AI speech-therapy product.</p>
+        <p class="small-label">Model, backend, dashboard, billing · <a href="https://izzyai.com" rel="noopener">izzyai.com ↗</a></p>
+      </div>
+      <div>
+        <p style="font-size:17px;line-height:1.5">Production 4K HDR video pipelines on cloud GPUs for a media client in the Netherlands.</p>
+        <p class="small-label">Freelance since 2025 · SOC Solutions 2023–25</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 SOLUTIONS -->
+  <section id="solutions" class="pad" style="padding-bottom:40px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 class="kicker">01 — AI solutions for businesses</h2>
+          <p class="display d2 rv-clip">What AI can do <span class="hl">for your business.</span></p>
+        </div>
+        <p>No jargon needed. Tell me the problem — I’ll tell you honestly whether AI is the right fix, then build it.</p>
+      </div>
+      <div class="grid4">
+        {outcomes.map((o, i) => (
+          <a class="card lift out rv" href={o.href} style={`--c:${outColors[i]};transition-delay:${i * 60}ms`}>
+            <span class="out-ic" aria-hidden="true"></span>
+            <h3>{o.t}</h3>
+            <p class="muted" style="font-size:15px;line-height:1.55;flex:1">{o.d}</p>
+            <span class="small-label">Proof: <span style={`color:${outColors[i]}`}>{o.proof}</span> <span class="arr" aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+      <a class="link-u" href="/contact/" style="margin-top:36px">Discuss your use case <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- 02 CAPABILITIES -->
+  <section id="capabilities" class="pad">
+    <span class="divider" aria-hidden="true"></span>
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 class="kicker">02 — Generative AI &amp; machine learning development services</h2>
+          <p class="display d2 rv-clip">Five layers I build, <span class="hl">far to near.</span></p>
+        </div>
+        <p>From the model at the back of the stack to the API your users touch. Most projects need three or more of these.</p>
+      </div>
+      <div class="caps">
+        {capabilities.map((c, i) => (
+          <details class="cap rv" name="caps" data-group="caps" open={i === 1} style={`--c:${ramp[i]}`}>
+            <summary>
+              <span class="idx">L{i + 1}</span>
+              <span class="plane" aria-hidden="true"></span>
+              <h3>{c.title}</h3>
+              <span class="line">{c.line}</span>
+              <span class="sign" aria-hidden="true">+</span>
+            </summary>
+            <div class="cap-body">
+              {c.items.map((it) => <span class="chip">{it}</span>)}
+              <a class="link-u" href={c.link.href} style="min-height:38px">{c.link.label} <span class="arr" aria-hidden="true">→</span></a>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 WORK -->
+  <section id="work" class="band pad">
+    <span class="divider" aria-hidden="true"></span>
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 class="kicker">03 — AI case studies</h2>
+          <p class="display d2 rv-clip">Systems in production, <span class="hl">not demos.</span></p>
+        </div>
+        <a class="link-u" href="/work/">All case studies <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      {projects.map((p, i) => (
+        <CaseFile slug={p.id} fig={String(i + 1).padStart(2, '0')} title={p.data.homeTitle} tag={p.data.tag} status={p.data.status} nodes={p.data.nodes} rows={p.data.rows} flip={i % 2 === 1} />
+      ))}
+
+      <div style="margin-top:96px;display:flex;flex-direction:column;gap:20px">
+        <h3 class="display" style="font-size:24px">More shipped work <span class="muted" style="font-weight:400">— built at SOC Solutions</span></h3>
+        <div class="table-wrap">
+          <table class="table">
+            <tbody>
+              {moreWork.map((m) => <tr><td>{m.name}</td><td class="muted">{m.desc}</td><td class="mono">{m.stack}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="margin-top:64px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px">
+          <h3 class="display" style="font-size:24px">Lab <span class="muted" style="font-weight:400">— self-initiated builds</span></h3>
+          <a class="mono" href={site.github} style="font-size:12px">All on GitHub ↗</a>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <tbody>
+              {lab.map((l) => (
+                <tr><td>{l.name}</td><td class="muted">{l.desc}</td><td class="mono">{l.stack}</td><td style="text-align:right"><a class="mono" href={l.url} style="font-size:12px" aria-label={`${l.name} code on GitHub`}>Repo <span class="arr arr-ne" aria-hidden="true">↗</span></a></td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 TESTIMONIAL -->
+  <section id="testimonial" class="pad" style="overflow:hidden">
+    <div aria-hidden="true" class="glow" style="left:-120px;top:80px;width:520px;height:520px;background:radial-gradient(circle,rgba(47,212,154,.14),transparent 65%)"></div>
+    <div class="wrap" style="position:relative"><Testimonial kicker="04 — Client testimonial" /></div>
+  </section>
+
+  <!-- 05 PROCESS -->
+  <section id="process" class="band pad">
+    <span class="divider" aria-hidden="true"></span>
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 class="kicker">05 — AI project process</h2>
+          <p class="display d2 rv-clip">Research <span class="hl">→</span> production.</p>
+        </div>
+        <p>Short cycles and regular demos. You see progress at every stage, not a surprise at the end.</p>
+      </div>
+      <div style="position:relative">
+      <span class="steps-line" aria-hidden="true"><span class="steps-dot"></span></span>
+      <ol class="steps">
+        {process.map((s, i) => (
+          <li class={`step rv${i === 0 ? ' done' : ''}${i === 1 ? ' active' : ''}`} style={`transition-delay:${i * 80}ms`}>
+            <span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <b>{s.name}</b>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 INSIGHTS -->
+  <section id="insights" class="pad" style="padding-bottom:96px">
+    <span class="divider" aria-hidden="true"></span>
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 class="kicker">06 — Insights on LLMs &amp; generative AI</h2>
+          <p class="display d2 rv-clip">Notes from <span class="hl">the GPU bench.</span></p>
+        </div>
+      </div>
+      <div class="newsletter card rv">
+        <div class="aurora" aria-hidden="true" style="right:-80px;top:-140px;width:380px;height:380px;opacity:.5"></div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:14px;max-width:40em">
+          <span class="small-label" style="color:var(--accent)">LinkedIn newsletter · {site.newsletter.name}</span>
+          <p class="display" style="font-size:clamp(22px,2.4vw,30px);line-height:1.2">Practical notes on building and shipping AI — LLMs, RAG, agents and GPU pipelines.</p>
+          <span class="small-label" style="text-transform:none;letter-spacing:.02em">First editions in progress · subscribe to get them as they publish</span>
+        </div>
+        <a class="btn" href={site.newsletter.url} style="position:relative">Subscribe on LinkedIn <span class="arr arr-ne" aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 ABOUT -->
+  <section id="about" class="band pad">
+    <span class="divider" aria-hidden="true"></span>
+    <div class="wrap grid12" style="row-gap:40px">
+      <div style="grid-column:span 5;display:flex;flex-direction:column;gap:20px">
+        <h2 class="kicker">07 — About Amar Ismail, AI engineer</h2>
+        <figure class="portrait" data-cursor="Hello">
+          <img src={site.portrait} alt="Portrait of Amar Ismail" width="960" height="960" loading="lazy" />
+          <figcaption>Amar Ismail · Faisalabad, PK</figcaption>
+        </figure>
+      </div>
+      <div style="grid-column:7 / span 6;display:flex;flex-direction:column;gap:24px;justify-content:center">
+        <p class="display d2 rv-clip" style="font-size:clamp(30px,3.4vw,44px)">I decide if AI is the right fix <span class="hl">before</span> I write the code.</p>
+        <p class="muted">I’m Amar, an AI engineer in Pakistan working with clients abroad. From 2023 to 2025 I shipped AI products at SOC Solutions, including the speech-therapy platform Izzy.AI. Since 2025 I’ve worked independently, mostly on GPU video pipelines and generative AI systems.</p>
+        <p class="muted">I build the unglamorous parts — the queue, the API, the container, the deploy — with the same care as the model. That is usually where AI projects fail.</p>
+        <div class="small-label" style="display:flex;flex-wrap:wrap;gap:8px 24px;text-transform:none;letter-spacing:.04em">
+          <span>BSCS · GCU Faisalabad</span><span>PIAIC AI Developer · A+</span><span>Deep Learning Specialization · Coursera</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:24px">
+          <a class="link-u" href="/about/">More about me <span class="arr" aria-hidden="true">→</span></a>
+          <a class="link-u" href={site.introVideo}>Watch the intro video <span class="arr" aria-hidden="true">▷</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 FAQ -->
+  <section id="faq" class="pad">
+    <span class="divider" aria-hidden="true"></span>
+    <div class="wrap grid12" style="row-gap:40px;align-items:start">
+      <div style="grid-column:span 4;display:flex;flex-direction:column;gap:16px">
+        <h2 class="kicker">08 — AI consulting FAQ</h2>
+        <p class="display d2 rv-clip" style="font-size:clamp(30px,3.4vw,44px)">Questions clients <span class="hl">ask first.</span></p>
+      </div>
+      <div style="grid-column:6 / span 7"><Faq items={homeFaqs} group="home-faq" /></div>
+    </div>
+  </section>
+
+  <!-- 09 CONTACT -->
+  <section id="contact" class="band pad">
+    <span class="divider" aria-hidden="true"></span>
+    <div class="wrap"><BriefBuilder kicker="09 — Hire an AI engineer" /></div>
+  </section>
+</Base>

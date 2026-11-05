@@ -1,0 +1,88 @@
+---
+// Per-page <head> tags + one connected JSON-LD @graph (WebSite, Person, ProfessionalService + page nodes).
+import { site, services } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;               // e.g. '/services/ai-consulting/'
+  type?: 'website' | 'article';
+  ogImage?: string;           // e.g. '/og/home.png'
+  ogAlt?: string;
+  published?: string;
+  modified?: string;
+  graph?: Record<string, unknown>[]; // extra schema nodes for this page
+  noindex?: boolean;
+}
+const { title, description, path, type = 'website', ogImage = '/og/home.png', ogAlt = title, published, modified, graph = [], noindex = false } = Astro.props;
+const url = new URL(path, site.url).toString();
+const img = new URL(ogImage, site.url).toString();
+const id = (h: string) => `${site.url}/${h}`;
+
+const base = [
+  {
+    '@type': 'WebSite',
+    '@id': id('#website'),
+    url: `${site.url}/`,
+    name: site.brand,
+    inLanguage: 'en-US',
+    publisher: { '@id': id('#amar') },
+  },
+  {
+    '@type': 'Person',
+    '@id': id('#amar'),
+    name: site.name,
+    jobTitle: site.jobTitle,
+    url: `${site.url}/about/`,
+    image: `${site.url}${site.portrait}`,
+    description: site.entity,
+    email: `mailto:${site.email}`,
+    address: { '@type': 'PostalAddress', addressLocality: site.city, addressCountry: site.country },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Government College University Faisalabad' },
+    knowsAbout: ['Artificial intelligence', 'Large language models', 'Retrieval-augmented generation', 'AI agents', 'Computer vision', 'Monocular depth estimation', '2D-to-3D video conversion', 'Diffusion models', 'Speech AI', 'MLOps', 'GPU inference', 'PyTorch', 'CUDA', 'FastAPI', 'Docker'],
+    sameAs: [site.linkedin, site.github],
+  },
+  {
+    '@type': 'ProfessionalService',
+    '@id': id('#business'),
+    name: site.brand,
+    url: `${site.url}/`,
+    image: `${site.url}/og/home.png`,
+    description: 'AI consulting and development services for businesses: AI chatbot and RAG development, AI agents, computer vision and video AI, and AI model deployment.',
+    founder: { '@id': id('#amar') },
+    email: `mailto:${site.email}`,
+    address: { '@type': 'PostalAddress', addressLocality: site.city, addressCountry: site.country },
+    areaServed: [{ '@type': 'Country', name: 'United States' }, { '@type': 'Place', name: 'Europe' }],
+    knowsLanguage: 'en',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'AI engineering services',
+      itemListElement: services.map((s) => ({ '@type': 'Offer', itemOffered: { '@id': `${site.url}/services/${s.slug}/#service` } })),
+    },
+    sameAs: [site.linkedin, site.github],
+  },
+];
+const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...base, ...graph] });
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
+<meta name="author" content={site.name} />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.brand} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={img} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogAlt} />
+<meta property="og:locale" content="en_US" />
+{published && <meta property="article:published_time" content={published} />}
+{modified && <meta property="article:modified_time" content={modified} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={img} />
+<script type="application/ld+json" set:html={jsonld} />

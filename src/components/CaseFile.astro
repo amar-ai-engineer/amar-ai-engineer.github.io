@@ -1,0 +1,46 @@
+---
+// One case study as an editorial "case file": system-path diagram + problem/role/approach/stack/outcome.
+interface Props {
+  slug: string;
+  fig: string;
+  title: string;
+  tag: string;
+  status: string;
+  nodes: { label: string; tech: string }[];
+  rows: { k: string; v: string }[];
+  flip?: boolean;
+  headingLevel?: 'h2' | 'h3';
+}
+const { slug, fig, title, tag, status, nodes, rows, flip = false, headingLevel = 'h3' } = Astro.props;
+const ramp = ['var(--r1)', 'var(--r2)', 'var(--r3)', 'var(--r4)', 'var(--r5)'];
+const col = (i: number) => ramp[Math.min(4, Math.round((i * 4) / Math.max(1, nodes.length - 1)))];
+const H = headingLevel;
+---
+<article class={`case rv${flip ? ' flip' : ''}`}>
+  <div class="case-vis card" data-cursor="View">
+    <p class="small-label" style="padding-bottom:24px">fig. {fig} — system path</p>
+    {nodes.map((n, i) => (
+      <div>
+        {i > 0 && <span class="conn" style={`--c:${col(i)}`} aria-hidden="true"><i style={`animation-delay:${(i * 0.27).toFixed(2)}s`}></i></span>}
+        <div class="node" style={`--c:${col(i)}`}>
+          <span class="node-i" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div><b>{n.label}</b><small>{n.tech}</small></div>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="case-text">
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <span class="tag">{tag}</span>
+      <span class="tag ok">{status}</span>
+    </div>
+    <H>{title}</H>
+    <dl class="kv">
+      {rows.map((r) => <div><dt>{r.k}</dt><dd>{r.v}</dd></div>)}
+    </dl>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
+      <a class="btn btn-sm" href="/contact/">Discuss a similar project <span class="arr" aria-hidden="true">→</span></a>
+      <a class="link-u" href={`/work/${slug}/`}>Read the case study <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</article>

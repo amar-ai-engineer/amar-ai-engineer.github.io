@@ -1,0 +1,18 @@
+# Amar Ismail — AI Engineering & Consulting
+
+> Amar Ismail is an AI engineer and consultant who builds and deploys production AI systems — LLM and RAG apps, AI agents, computer vision and GPU pipelines — for businesses in the US and Europe.
+
+## Services
+- [AI & machine learning consulting](https://amar-ai-engineer.github.io/services/ai-consulting/)
+- [AI chatbot development (RAG)](https://amar-ai-engineer.github.io/services/ai-chatbot-development/)
+- [AI agent development](https://amar-ai-engineer.github.io/services/ai-agents/)
+- [Computer vision development](https://amar-ai-engineer.github.io/services/computer-vision/)
+- [AI model deployment & MLOps](https://amar-ai-engineer.github.io/services/mlops-model-deployment/)
+
+## Case studies
+- [Automated 2D-to-3D HDR video pipeline](https://amar-ai-engineer.github.io/work/stereo-3d-video-pipeline/)
+- [Izzy.AI speech-therapy platform](https://amar-ai-engineer.github.io/work/izzy-ai/)
+- [GPU video upscaling pipeline](https://amar-ai-engineer.github.io/work/video-upscaling-pipeline/)
+
+## Contact
+- amarismail522@gmail.com · https://www.linkedin.com/in/amar-ai-engineer/ · https://amar-ai-engineer.github.io/contact/

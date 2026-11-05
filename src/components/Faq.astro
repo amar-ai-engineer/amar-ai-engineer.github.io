@@ -1,0 +1,13 @@
+---
+// Visible FAQ (answers always in the HTML, so search engines and AI answer engines can read them).
+interface Props { items: { q: string; a: string }[]; group: string; openFirst?: boolean }
+const { items, group, openFirst = true } = Astro.props;
+---
+<div class="faq">
+  {items.map((f, i) => (
+    <details name={group} data-group={group} open={openFirst && i === 0} class="rv">
+      <summary><h3 style="font:inherit">{f.q}</h3><span class="sign" aria-hidden="true">+</span></summary>
+      <p class="a">{f.a}</p>
+    </details>
+  ))}
+</div>

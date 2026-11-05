@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../data/site';
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const ramp = ['var(--r1)', 'var(--r2)', 'var(--r3)', 'var(--r4)', 'var(--r5)'];
+const graph = [{
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Services' },
+  ],
+}];
+---
+<Base title="AI Development & Consulting Services | Amar Ismail" description="AI consulting, AI chatbot and RAG development, AI agents, computer vision and model deployment — built and shipped by one experienced AI engineer." graph={graph}>
+  <Crumbs items={[{ name: 'Home', href: '/' }, { name: 'Services' }]} />
+  <section style="padding:56px 0 96px">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px">
+      <p class="kicker rise">Services</p>
+      <h1 class="display d1 rise" style="animation-delay:.1s">AI development &amp; <span class="hl">consulting services</span></h1>
+      <p class="lede rise" style="animation-delay:.25s">Five ways I help businesses with AI — from deciding what to build, to running it in production. Each is delivered end to end by the same engineer.</p>
+    </div>
+  </section>
+  <section class="band pad-s">
+    <div class="wrap grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
+      {services.map((s, i) => (
+        <a class="card lift out rv" href={`/services/${s.id}/`} style={`--c:${ramp[i]};min-height:260px`}>
+          <span class="out-ic" aria-hidden="true"></span>
+          <h2 class="display" style="font-size:24px;line-height:1.2">{s.data.h1.charAt(0).toUpperCase() + s.data.h1.slice(1)}</h2>
+          <p class="muted" style="font-size:15px;flex:1">{s.data.description}</p>
+          <span class="small-label">Learn more <span class="arr" aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+  <section class="pad">
+    <div class="wrap" style="display:flex;flex-direction:column;align-items:flex-start;gap:28px">
+      <p class="display d2">Not sure which one you need?</p>
+      <a class="btn" href="/contact/">Book a free scoping call <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</Base>
